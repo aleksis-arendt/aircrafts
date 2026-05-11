@@ -1,0 +1,50 @@
+\begin{thebibliography}{1}
+
+\bibitem{arnold_classical_mechanics}
+V.~I. Arnold.
+\newblock {\em Mathematical Methods of Classical Mechanics}, volume~60 of {\em
+  Graduate Texts in Mathematics}.
+\newblock Springer, New York, 2 edition, 1989.
+
+\bibitem{yanushevsky2019modern}
+Rafael Yanushevsky.
+\newblock {\em Modern Missile Guidance}.
+\newblock CRC Press, Boca Raton, FL, 2 edition, 2019.
+
+\bibitem{rindler2018calculus}
+Filip Rindler.
+\newblock {\em Calculus of Variations}.
+\newblock Universitext. Springer, Cham, 2018.
+
+\bibitem{stevens_lewis_johnson_aircraft_control_2015}
+Brian~L. Stevens, Frank~L. Lewis, and Eric~N. Johnson.
+\newblock {\em Aircraft Control and Simulation: Dynamics, Controls Design, and
+  Autonomous Systems}.
+\newblock Wiley, 3 edition, 2015.
+
+\bibitem{nasa_glenn_ideal_rocket_equation}
+{NASA Glenn Research Center}.
+\newblock Ideal rocket equation.
+\newblock
+  \url{https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/ideal-rocket-equation/}.
+\newblock Accessed 2026-05-06.
+
+\bibitem{le_van_luyen_la1a}
+Le~Van Luyen.
+\newblock {\emph{Linear Algebra {2A}}}.
+\newblock Lecture slides, University of Science, VNU-HCM.
+\newblock Course material.
+
+\bibitem{kelley_peterson_ode_2010}
+Walter~G. Kelley and Allan~C. Peterson.
+\newblock {\em The Theory of Differential Equations: Classical and
+  Qualitative}.
+\newblock Springer, 2 edition, 2010.
+
+\bibitem{lee_smooth_manifolds}
+John~M. Lee.
+\newblock {\em Introduction to Smooth Manifolds}, volume 218 of {\em Graduate
+  Texts in Mathematics}.
+\newblock Springer, New York, 2 edition, 2013.
+
+\end{thebibliography}

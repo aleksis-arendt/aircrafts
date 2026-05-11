@@ -1,0 +1,2 @@
+status,alpha,h_esc_m,window_length_s,burn_fraction,burn_percent,m_used_kg,t_burn_s,tau_threshold_s,tau_window_s,tau_energy_s,v_threshold_m_s,final_mass_kg,max_height_m,max_velocity_m_s,max_energy_J_kg
+sustained threshold crossing,0.1,637100.0,1000.0,0.925048828125,92.5048828125,3700.1953125,185.009765625,279.0,279.0,inf,3494.8952412285776,1299.8046875,1480961.3491896205,4289.111783271447,-50764382.561794475

@@ -1,0 +1,78 @@
+﻿Section,Priority,Status,Item,Description,Key equations / objects,Output
+Framing,Core,Done,Project title,Project title.,ODE + feedback + stability + energy + numerical simulation,Title + abstract 5–7 dòng
+Framing,Core,Done,Central question,Central question.,state → ODE → feedback → stability → energy → simulation,Thesis rõ trong Introduction
+Framing,Core,Dropped,Bài báo thầy gửi,Dropped from the paper.,motion / tracking / control / feedback,3–5 dòng trong Introduction
+Input,Core,Done,Tài liệu PTVP lớp,Tài liệu PTVP lớp.,"x'=f(t,x), λ²+aλ+b=0",Nền toán bám sát lecture
+Input,Recommended,Done,Nguồn modeling/control nhập môn,Nguồn modeling/control nhập môn.,x'=Ax+Bu,Một paragraph background
+Core ODE,Core,Done,Nguồn gốc ODE lõi,Nguồn gốc ODE lõi.,m h'' = T - mg - b h',Subsection derivation
+Core ODE,Core,Done,Mô hình độ cao,Mô hình độ cao.,h'=v; v'=u-g-cv,Box phương trình chính
+Core ODE,Core,Done,Assumptions,Assumptions.,F_drag≈-cv,Paragraph 'Scope and assumptions'
+Feedback,Core,Done,Sai số độ cao,Sai số độ cao.,e(t)=h(t)-h_d,Định nghĩa e(t)
+Feedback,Core,Done,PD feedback,PD feedback.,u=g-k₁e-k₂v,Giải thích vai trò từng term
+Feedback,Core,Done,Phương trình sai số,Phương trình sai số.,e''+(k₂+c)e'+k₁e=0,Box phương trình trung tâm
+Interpretation,Core,Done,Nó mô tả gì?,Nó mô tả gì?.,closed-loop error dynamics,Paragraph giải thích bằng lời
+Interpretation,Core,Done,Lò xo giảm chấn,Lò xo giảm chấn.,x''+γx'+kx=0,Bảng analogy ngắn
+Stability,Core,Done,Phương trình đặc trưng,Phương trình đặc trưng.,λ²+(k₂+c)λ+k₁=0,Điều kiện ổn định
+Stability,Core,Done,Điều kiện ổn định,Điều kiện ổn định.,"k₁>0, k₂+c>0 ⇒ e(t)→0",Kết luận stability
+Stability,Optional,Done,Các regime damping,Các regime damping.,Δ=(k₂+c)²-4k₁,Bảng 3 trường hợp
+Energy method,Core,Done,Energy-like function,Energy-like function.,E(t)=1/2(e')²+1/2 k₁e²,Section Energy method
+Energy method,Core,Done,Dissipation,Dissipation.,E'=-(k₂+c)(e')²≤0,Kết luận năng lượng sai số không tăng
+Energy method,Recommended,Done,Accumulated error energy,Accumulated error energy.,J_E=∫E(t)dt,Example tính được J_E
+Energy method,Recommended,Done,Accumulated control effort,Accumulated control effort.,J_u=∫(u-g)²dt,Example tính được J_u
+Energy method,Recommended,Done,Combined performance cost,Combined performance cost.,J=J_E+αJ_u,Subsection performance cost
+Energy method,Recommended,Done,Nhiễu/tác động ngoài,Nhiễu/tác động ngoài.,e''+(k₂+c)e'+k₁e=d(t); E'=-(k₂+c)(e')²+d(t)e',Paragraph về robustness
+Numerical,Core,Done,Đưa về hệ bậc nhất,Đưa về hệ bậc nhất.,e'=w; w'=-(k₂+c)w-k₁e,Chuẩn bị mô phỏng
+Numerical,Core,Done,Euler method,Euler method.,"x_{n+1}=x_n+Δt f(t_n,x_n)",Công thức + giải thích
+Numerical,Recommended,Done,Runge–Kutta 4,Runge–Kutta 4.,x_{n+1}=x_n+Δt/6(k₁+2k₂+2k₃+k₄),Công thức RK4 hoặc mô tả
+Numerical,Recommended,Done,Plot mô phỏng,Plot mô phỏng.,e(t) vs t,1 hình hoặc bảng giá trị
+Numerical,Recommended,Done,Numerical stress tests,Numerical stress tests.,h(0)<h_d; h(0)>h_d; k₂=0,3 plots height response
+Numerical,Recommended,Done,Variational vs PD simulation,Variational vs PD simulation.,shooting method + RK4,Figure comparison
+Fuel extension,Recommended,Done,Khối lượng biến thiên,Khối lượng biến thiên.,h'=v; v'=T(t)/m(t)-g-cv; m'=-q(t),Subsection 'Variable mass and fuel consumption'
+Fuel extension,Recommended,Done,Đốt và xả nhiên liệu,Đốt và xả nhiên liệu.,m'= -q_b(t)-q_d(t); T=v_e q_b(t),Giải thích q_b và q_d
+Fuel extension,Recommended,Done,Fuel dumping,Fuel dumping.,"m(t_landing)≤M_landing,max",Ứng dụng thực tế
+Fuel extension,Recommended,Dropped,Landing weight limit,Dropped from the paper.,E_touchdown≈1/2 m v_vertical²; K=1/2 m v²,Paragraph giải thích vì sao phải có MLW
+Fuel extension,Recommended,Dropped,Holding time,Dropped from the paper.,t_hold=m_extra/β,Formula + numerical example
+Fuel extension,Recommended,Done,Variable-mass ODE effect,Variable-mass ODE effect.,h''=T(t)/m(t)-g-bh'/m(t),Subsection effect on ODE model
+Fuel extension,Recommended,Done,Thrust and damping formulas,Thrust and damping formulas.,T=m(a+g)+bv; c_after/c_before=m_before/m_after,Useful formulas subsection
+Fuel extension,Optional,Dropped,Máy bay đường dài,Dropped from the paper.,x'=V; m'=-(a+bm),Extension VN→Mỹ nếu có thông số đẹp
+Fuel extension,Optional,Dropped,Bơm nhiều nhiên liệu chưa chắc tốt,Dropped from the paper.,m(0)=m_dry+m_payload+F₀≤M_max,Insight về fuel penalty
+Fuel extension,Optional,Dropped,Tối ưu nhiên liệu,Dropped from the paper.,"min F₀ subject to F(T)≥F_reserve, m(0)≤M_max",Paragraph optimal planning
+Variational outlook,Optional,Done,Functional sai số,Functional sai số.,J[e]=∫₀ᵀ(e²+β(e')²)dt,Outlook ngắn
+Variational outlook,Optional,Done,Euler–Lagrange toy,Euler–Lagrange toy.,"βe''=e, e(0)=e₀, e(T)=0",Một ví dụ giải được
+Variational outlook,Optional,Done,Optimal control cost,Optimal control cost.,J[u]=∫₀ᵀ(e²+α(e')²+βu²)dt,Future direction
+Variational outlook,Recommended,Done,Relate PD roots to Euler--Lagrange,Relate PD roots to Euler--Lagrange.,e''+γe'+k₁e=0 into fourth-order EL,Derive algebraic relation
+Continuum mechanics,Optional,Dropped,Nguồn gốc lực cản,Dropped from the paper.,F_drag≈-cv,Một paragraph
+Further work,Optional,Done,Periodic forcing,Periodic forcing.,h''=u-g-ch'+A sin(ωt),Conclusion further work
+Further work,Optional,Done,3D vector motion,3D vector motion.,r(t)∈R³; v=r',Conclusion further work
+Further work,Optional,Done,Nonlinear drag,Nonlinear drag.,-c|v|v,Conclusion further work
+Further work,Optional,Dropped,External physical fields,Dropped from the paper.,Lorentz force / radiation pressure,Conclusion further work
+Further work,Recommended,Dropped,Real-time control limitation,Dropped from the paper.,initial data → fixed gains → response,Paragraph limitation
+Further work,Recommended,Dropped,Discrete-time thrust generalization,Dropped from the paper.,T_n hoặc u_n; t_n=nΔt,Future model sketch
+Further work,Recommended,Done,Adaptive gains from estimated weights,Adaptive gains from estimated weights.,"theta=(p,q,r); kappa(t)=(k1(t),k2(t))",Conclusion further work
+Further work,Recommended,Done,Data tools for realtime estimation,Data tools for realtime estimation.,linear programming + normalization + noise filtering,Conclusion further work
+Functional analysis,Optional,Dropped,ODE sang PDE,Dropped from the paper.,"du/dt=Au, u(t,·)∈L² hoặc H¹",Future direction
+Extension: escape planet,Recommended,Done,Tàu thoát hành tinh,Tàu thoát hành tinh.,r'=v; v'=-GM/r²+u(t),Case study ngắn
+Extension: escape planet,Recommended,Done,Spacecraft propellant mass model,Spacecraft propellant mass model.,m(t)=m_dry+m_p(t); m'=-ρ_p(t),Subsection spacecraft propellant model
+Extension: escape planet,Recommended,Done,Variable-mass force balance,Variable-mass force balance.,T=v_eρ_p(t),Subsection variable-mass force balance
+Extension: escape planet,Recommended,Done,Ideal rocket equation,Ideal rocket equation.,Δv=v_e ln(m_0/m_f),Rocket equation derivation
+Extension: escape planet,Recommended,Done,Energy thoát,Energy thoát.,E=1/2v²-GM/r; escape if E≥0,Công thức escape velocity
+Extension: escape planet,Recommended,Done,Vận tốc thoát,Vận tốc thoát.,v_esc=sqrt(2GM/R),Bảng Moon/Mars/Venus/Earth nếu có dữ liệu
+Extension: escape planet,Recommended,Dropped,Fuel requirement for escape,Dropped from the paper.,m_prop/m_0=1-exp(-v_esc/v_e),Formula fuel requirement
+Extension: escape planet,Recommended,Dropped,Solar-system escape statistics,Dropped from the paper.,v_esc table + mass ratio,Fun statistics table
+Extension: escape planet,Recommended,Done,Escape state definition,Escape state definition.,E≥0 hoặc r(t)≥R_escape,Definition + short criterion
+Extension: escape planet,Recommended,Done,Time-to-escape formula,Time-to-escape formula.,t_escape=∫dr/v(r),Derivation for simplified radial model
+Extension: asteroid,Optional,Dropped,Thiên thạch lệch quỹ đạo,Dropped from the paper.,r''=-GM r/|r|³+u(t),Case study/outlook
+Extension: asteroid,Optional,Dropped,Impulse model,Dropped from the paper.,v⁺=v⁻+Δv,Giải thích tác động nhỏ nhưng sớm có thể tạo lệch lớn
+Extension: asteroid,Optional,Dropped,Vùng an toàn,Dropped from the paper.,min_t |r_ast(t)-r_Earth(t)| > R_safe,Safety condition
+Hỏi vui: spacetime,Optional,Dropped,Tàu trong spacetime,Dropped from the paper.,"X^μ(τ), DU/dτ=A",1 đoạn future direction
+Hỏi vui: black hole,Do not include,Dropped,Hố đen,Dropped from the paper.,Schwarzschild / horizon / causal structure,Có thể giữ làm curiosity riêng
+Output,Core,Done,Bản report,Bản report.,"Core 70%, fuel/escape/asteroid 30%",PDF report
+Output,Recommended,Done,Plot/code,Plot/code.,e(t) decay,1 figure
+Output,Recommended,Done,LoR material,LoR material.,project record,Portfolio nhỏ
+Appendix,Recommended,Dropped,RK4 proof,Dropped from the paper.,Taylor expansion / order conditions,Appendix proof
+Appendix,Recommended,Done,Characteristic-solution proof,Characteristic-solution proof.,λ²+aλ+b=0; e^{λt},Appendix proof
+Success criterion,Core,Done,5 câu phải trả lời được,5 câu phải trả lời được.,h'=v; v'=u-g-cv; e''+(k₂+c)e'+k₁e=0,Checklist tự kiểm
+Extension: escape planet,Recommended,Done,Phát triển bài toán escape planet,Phát triển bài toán escape planet.,"m(t), r(t), v(t), E=1/2 v^2-GM/r",Expanded escape-planet subsection
+Extension: escape planet,Recommended,Dropped,Thống kê lại escape từng hành tinh trong hệ mặt trời,Dropped from the paper.,v_esc=sqrt(2GM/R); m0/mf=exp(v_esc/v_e),Recomputed solar-system escape table
+Appendix,Recommended,Done,Operator factorization proof,Operator factorization proof.,(D-lambda_1)(D-lambda_2)y = 0; D=d/dt,Appendix proof for factorization lemma
+Summary,Stats,Project completion 100%,Project progress summary,Done: 56/76 (73.7%); Dropped: 20/76 (26.3%). Active completion: 56/56 (100%). Items marked Dropped are not counted toward completion.,completion = Done / (Done + Progress + Partial),One-row project status summary

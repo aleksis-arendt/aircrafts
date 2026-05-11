@@ -1,0 +1,157 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{aircrafts}[2026/05/06 arXiv submission style]
+
+% This style follows the compact arXiv source provided in arXiv-2605.02988v1:
+% plain article layout, default title block, standard theorem numbering.
+
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{amsmath,amssymb,amsfonts,latexsym}
+\RequirePackage{graphicx}
+\RequirePackage{tikz}
+\RequirePackage{bbding}
+\RequirePackage[
+  colorlinks=false,
+  pdfborder={0 0 1},
+  linkbordercolor={1 0 0},
+  citebordercolor={1 0 0},
+  urlbordercolor={1 0 0}
+]{hyperref}
+\usepackage{booktabs}
+\usepackage{array}
+\emergencystretch=1em
+
+% Slightly wider text block than the default article layout.
+\setlength{\textwidth}{6.25in}
+\setlength{\oddsidemargin}{0.125in}
+\setlength{\evensidemargin}{0.125in}
+\usepackage{longtable}
+
+% Use the sans-serif family for bold text and section headings.
+\definecolor{sectionnumbergreenbrown}{RGB}{0,128,0}
+\definecolor{subsectionnumberblue}{RGB}{35,92,205}
+\definecolor{subsubsectionnumberred}{RGB}{178,45,45}
+\newcommand{\sectionnumbercolor}{\color{sectionnumbergreenbrown}}
+\newcommand{\subsectionnumbercolor}{\color{subsectionnumberblue}}
+\newcommand{\subsubsectionnumbercolor}{\color{subsubsectionnumberred}}
+\DeclareRobustCommand{\textbf}[1]{{\sffamily\bfseries #1}}
+\makeatletter
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+                                   {-3.5ex \@plus -1ex \@minus -.2ex}%
+                                   {2.3ex \@plus.2ex}%
+                                   {\normalfont\sffamily\Large\bfseries}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\normalfont\sffamily\large\bfseries}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\normalfont\sffamily\normalsize\bfseries}}
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+                                    {3.25ex \@plus1ex \@minus.2ex}%
+                                    {-1em}%
+                                    {\normalfont\sffamily\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
+                                       {3.25ex \@plus1ex \@minus .2ex}%
+                                       {-1em}%
+                                      {\normalfont\sffamily\normalsize\bfseries}}
+\renewcommand{\@seccntformat}[1]{%
+  \begingroup
+  \sffamily\bfseries
+  \@ifundefined{#1numbercolor}{}{\csname #1numbercolor\endcsname}%
+  \csname the#1\endcsname.\quad
+  \endgroup
+}
+\makeatother
+
+% Common notation, adapted from the Lazer notes.
+\newcommand{\mc}{\mathcal}
+\newcommand{\bb}{\mathbb}
+\newcommand{\ti}{\tilde}
+\newcommand{\clo}{\overline}
+\newcommand{\vect}{\overrightarrow}
+\newcommand{\pa}{\partial}
+\newcommand{\de}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\ome}{\omega}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\limit}{\displaystyle \lim}
+\newcommand{\ra}{\Rightarrow}
+\newcommand{\lra}{\Leftrightarrow}
+\newcommand{\dsum}{\displaystyle \sum}
+\newcommand{\dprof}{\displaystyle \prod}
+\newcommand{\nlim}{\displaystyle \lim_{n \to +\infty}}
+\newcommand{\series}{\dsum_{n = 1}^{\infty}}
+\newcommand{\dd}{\,\mathrm{d}}
+
+% Common operators.
+\newcommand{\supp}{\mathrm{supp}}
+\newcommand{\vol}{\mathrm{Vol}}
+\newcommand{\multi}{\mathrm{Multi}}
+\newcommand{\diam}{\mathrm{diam}}
+\newcommand{\rank}{\mathrm{rank}}
+\newcommand{\kernel}{\mathrm{ker}}
+\newcommand{\im}{\mathrm{Im}}
+\newcommand{\spann}{\mathrm{span}}
+\newcommand{\cl}{\mathrm{cl}}
+\newcommand{\inte}{\mathrm{Int}}
+\newcommand{\exte}{\mathrm{Ext}}
+\newcommand{\alt}{\mathrm{Alt}}
+\newcommand{\sng}{\mathrm{sgn}}
+\newcommand{\sgn}{\mathrm{sgn}}
+
+% Delimiters and spaces.
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\ip}[1]{\left\langle #1 \right\rangle}
+\newcommand{\circl}{\bb{S}}
+\newcommand{\real}{\bb{R}}
+\newcommand{\comple}{\bb{complex}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\NN}{\mathbf{N}}
+\newcommand{\RR}{\mathbf{R}}
+\newcommand{\CC}{\mathbf{C}}
+\newcommand{\ZZ}{\mathbf{Z}}
+
+% Theorem environments, matching the arXiv sample.
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+
+\makeatletter
+\def\@begintheorem#1#2{\trivlist
+   \item[\hskip \labelsep{\sffamily\bfseries #1\ #2.}]}
+\def\@opargbegintheorem#1#2#3{\trivlist
+      \item[\hskip \labelsep{\sffamily\bfseries #1\ #2\ (#3).}]}
+\makeatother
+
+% Kept for compatibility with the existing source.
+\newenvironment{boxedtheorem}[1][]{\begin{theorem}[#1]}{\end{theorem}}
+\newenvironment{boxeddefinition}[1][]{\begin{definition}[#1]}{\end{definition}}
+
+% A lightweight proof environment because this MiKTeX install is missing amsthm.
+\newenvironment{proof}[1][Proof]{%
+  \par\medskip\noindent{\it #1.}\enspace
+}{%
+  \hfill\(\square\)\par\medskip
+}
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+\newenvironment{sol}{\begin{proof}[Solution]}{\end{proof}}
+
+% Keywords line after the abstract.
+\newcommand{\keywordname}{\textbf{\emph{Keywords}}}
+\newcommand{\keywords}[1]{%
+  \par\medskip\noindent\keywordname\enspace #1\par\medskip
+}
+
+\makeatletter
+\renewcommand*\l@section{\@dottedtocline{1}{1.5em}{2.3em}}
+\renewcommand*\l@subsection{\@dottedtocline{2}{3.8em}{3.2em}}
+\renewcommand*\l@subsubsection{\@dottedtocline{3}{7.0em}{4.1em}}
+\makeatother
+
+\endinput

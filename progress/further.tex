@@ -1,0 +1,242 @@
+\subsection{A Trajectory-Based Escape Criterion}
+Before studying escape time from the trajectory $h(t)$, we recall the classical escape velocity formula. 
+Let $M$ be the mass of the planet, $G$ the gravitational constant, and let $r$ denote the distance from the center of the planet. 
+The gravitational potential energy of a spacecraft of mass $m$ at radius $r$ is
+\[
+    U(r)=-\frac{GMm}{r}.
+\]
+If the spacecraft escapes to infinity with zero final speed, then its final mechanical energy is $0$. 
+Therefore, at radius $r$, the minimum initial velocity required for escape is determined by
+\[
+    \frac12 m v_{\mathrm{esc}}^2-\frac{GMm}{r}=0.
+\]
+Solving for $v_{\mathrm{esc}}$, we obtain
+\[
+    \boxed{ v_{\mathrm{esc}}(r) = \sqrt{\frac{2GM}{r}}. }
+\]
+If $R$ denotes the radius of the planet and $h(t)$ denotes the altitude above the surface, then
+\[
+    r(t)=R+h(t),
+\]
+so the escape velocity at altitude $h(t)$ is
+\[
+    v_{\mathrm{esc}}(h(t)) = \sqrt{\frac{2GM}{R+h(t)}}.
+\]
+
+This formula gives an energy-based escape condition. 
+If, at some time $T_0$, the spacecraft satisfies
+\[
+    \frac12 v(T_0)^2-\frac{GM}{R+h(T_0)}\geq 0,
+\]
+and $v(T_0)\ge0$, this is equivalent to
+\[
+    v(T_0)\geq \sqrt{\frac{2GM}{R+h(T_0)}},
+\]
+then, in the idealized model without further thrust and without drag, the spacecraft has enough outward mechanical energy to escape to infinity.
+The escape velocity formula gives an energy-based condition for escape. 
+However, when we simulate an ODE trajectory $h(t)$, it is useful to introduce a trajectory-based criterion. 
+Merely reaching a certain height once is not enough, because the spacecraft may cross that height and later fall back. 
+Therefore, we define escape in terms of remaining above a prescribed threshold.
+
+\begin{definition}[Threshold escape]
+Let $h_{\mathrm{esc}}>0$ be a prescribed escape threshold. 
+We say that a trajectory $h(t)$ escapes beyond $h_{\mathrm{esc}}$ if there exists a time $T_0\ge 0$ such that
+\[
+    h(t)\ge h_{\mathrm{esc}} \qquad \text{for all } t\ge T_0.
+\]
+In this case, $T_0$ is called an escape time beyond the threshold $h_{\mathrm{esc}}$.
+\end{definition}
+Since such a time $T_0$ is not necessarily unique, we define the minimal escape time.
+\begin{definition}[Minimal escape time]
+If $h(t)$ escapes beyond $h_{\mathrm{esc}}$, we define
+\[
+    \tau_{\mathrm{esc}} = \inf \left\{ T_0\ge 0: h(t)\ge h_{\mathrm{esc}} \text{ for all } t\ge T_0 \right\}.
+\]
+If no such $T_0$ exists, we set
+\[
+    \tau_{\mathrm{esc}}=+\infty.
+\]
+\end{definition}
+
+This definition distinguishes three possible behaviors. 
+First, the spacecraft may escape beyond the threshold, meaning that it eventually remains above $h_{\mathrm{esc}}$. 
+Second, it may cross the threshold temporarily but later fall back below it. 
+Third, it may never reach the threshold at all.
+\begin{lemma}[First crossing and threshold escape]
+Suppose that $h$ is continuous and that there exists $\tau\geq 0$ such that
+\[
+\begin{cases}
+    h(t)<h_{\mathrm{esc}}, & 0\leq t<\tau,\\
+    h(\tau)=h_{\mathrm{esc}},\\
+    h(t)\geq h_{\mathrm{esc}}, & t\geq \tau.
+\end{cases}
+\]
+\[
+    \tau_{\mathrm{esc}}=\tau.
+\]
+\end{lemma}
+\begin{proof}
+By assumption, $h(t)\geq h_{\mathrm{esc}}$ for every $t\geq \tau$, so $\tau$ belongs to the set defining $\tau_{\mathrm{esc}}$. Hence
+\[
+    \tau_{\mathrm{esc}}\leq \tau.
+\]
+On the other hand, for every $T_0<\tau$, there exists $t=T_0$ such that
+\[
+    h(t)<h_{\mathrm{esc}},
+\]
+so $T_0$ cannot be an escape time. Therefore
+\[
+    \tau_{\mathrm{esc}}\geq \tau.
+\]
+This proves the lemma.
+\end{proof}
+\begin{lemma}[Escape-time bound from a velocity lower bound]
+Suppose that
+\[
+    h'(t)\geq v_{\min}>0
+\]
+for all $t\in[0,T]$. If
+\[
+    h(0)<h_{\mathrm{esc}},
+\]
+then the trajectory reaches the threshold no later than
+\[
+    T_{\mathrm{hit}} = \frac{h_{\mathrm{esc}}-h(0)}{v_{\min}}.
+\]
+In particular, if the trajectory remains above $h_{\mathrm{esc}}$ after reaching it, then
+\[
+    \tau_{\mathrm{esc}} \leq \frac{h_{\mathrm{esc}}-h(0)}{v_{\min}}.
+\]
+\end{lemma}
+\begin{proof}
+Since $h'(t)\geq v_{\min}$, we have
+\[
+    h(t)-h(0) = \int_0^t h'(s)\,ds \geq \int_0^t v_{\min}\,ds = v_{\min}t.
+\]
+Hence
+\[
+    h(t)\geq h(0)+v_{\min}t.
+\]
+If
+\[
+    t\geq \frac{h_{\mathrm{esc}}-h(0)}{v_{\min}},
+\]
+then
+\[
+    h(t)\geq h_{\mathrm{esc}}.
+\]
+Therefore the threshold is reached no later than $T_{\mathrm{hit}}$. 
+If the trajectory stays above the threshold afterward, then the same bound applies to $\tau_{\mathrm{esc}}$.
+\end{proof}
+\begin{lemma}[Escape-time bound from an acceleration lower bound]
+Suppose that
+\[
+    h''(t)\geq a_{\min}>0
+\]
+for $t\geq 0$, and suppose
+\[
+    h(0)=h_0<h_{\mathrm{esc}},\qquad h'(0)=v_0.
+\]
+Then
+\[
+    h(t)\geq h_0+v_0t+\frac12a_{\min}t^2.
+\]
+Consequently, if $v_0\geq 0$, the trajectory reaches $h_{\mathrm{esc}}$ no later than
+\[
+    T_{\mathrm{hit}} = \frac{ -v_0+\sqrt{v_0^2+2a_{\min}(h_{\mathrm{esc}}-h_0)} }{a_{\min}}.
+\]
+If the trajectory remains above $h_{\mathrm{esc}}$ after reaching it, then
+\[
+    \tau_{\mathrm{esc}}\leq T_{\mathrm{hit}}.
+\]
+\end{lemma}
+\begin{proof}
+Integrating $h''(t)\geq a_{\min}$, we get
+\[
+    h'(t)\geq v_0+a_{\min}t.
+\]
+Integrating once more,
+\[
+    h(t)\geq h_0+v_0t+\frac12a_{\min}t^2.
+\]
+Thus it is enough to choose $t$ such that
+\[
+    h_0+v_0t+\frac12a_{\min}t^2 = h_{\mathrm{esc}}.
+\]
+Solving this quadratic equation gives
+\[
+    T_{\mathrm{hit}} = \frac{ -v_0+\sqrt{v_0^2+2a_{\min}(h_{\mathrm{esc}}-h_0)} }{a_{\min}}.
+\]
+Hence the actual trajectory reaches the threshold no later than this time. 
+If it stays above the threshold afterward, this also bounds $\tau_{\mathrm{esc}}$.
+\end{proof}
+\begin{lemma}[Energy escape condition]
+Assume that after time $T_b$, the spacecraft moves only under Newtonian gravity:
+\[
+    h''(t)=-\frac{GM}{(R+h(t))^2}.
+\]
+Let
+\[
+    \mathcal E(t) = \frac12(h'(t))^2-\frac{GM}{R+h(t)}.
+\]
+Then $\mathcal E(t)$ is conserved for $t\geq T_b$. 
+If
+$\mathcal E(T_b)\geq 0$ and $h'(T_b)>0,$
+then the spacecraft escapes to infinity in the idealized gravitational model.
+\end{lemma}
+
+\begin{proof}
+Differentiating $\mathcal E(t)$, we obtain
+\begin{align*}
+    \mathcal E'(t) &= h'(t)h''(t) + \frac{GMh'(t)}{(R+h(t))^2}.\\
+    &= h'(t)\left(-\frac{GM}{(R+h(t))^2}\right) + \frac{GMh'(t)}{(R+h(t))^2} \\
+    &=0.
+\end{align*}
+Hence $\mathcal E(t)$ is conserved.
+
+If $\mathcal E(T_b)\geq 0$, then
+\[
+    \frac12v(t)^2-\frac{GM}{R+h(t)}\geq 0.
+\]
+Thus
+\[
+    v(t)^2\geq \frac{2GM}{R+h(t)}.
+\]
+Since $h'(T_b)>0$, the velocity is initially outward. Moreover, the velocity cannot later become zero, because at such a point the conserved energy would be
+\[
+    \mathcal E(t)=-\frac{GM}{R+h(t)}<0,
+\]
+which contradicts $\mathcal E(t)=\mathcal E(T_b)\geq0$. Hence the trajectory continues outward and has enough mechanical energy to reach arbitrarily large radius in the idealized model. Therefore the spacecraft escapes to infinity.
+\end{proof}
+We choose the threshold height in the form
+\[
+    \boxed{ h_{\mathrm{esc}}=\alpha R,}
+\]
+where $R$ is the radius of the planet and $\alpha>0$. 
+This choice makes the escape threshold relative to the size of the planet. 
+For example, $\alpha=0.1$ means that the spacecraft must remain above a height equal to $10\%$ of the planet's radius.
+
+At the threshold height, the distance from the center of the planet is
+\[
+    \boxed{ R+h_{\mathrm{esc}}=(1+\alpha)R. }
+\]
+Therefore, the remaining escape velocity at the threshold is
+\[
+    \boxed{ v_{\mathrm{esc}}(\alpha) = \sqrt{ \frac{2GM}{(1+\alpha)R} } = \frac{v_{\mathrm{esc}}(0)}{\sqrt{1+\alpha}}. }
+\]
+Thus, increasing the threshold height decreases the remaining velocity needed for escape.
+\begin{definition}[Sustained threshold crossing]
+Let $h_{\mathrm{esc}}=\alpha R$ be the chosen escape threshold, and let $\Delta T>0$ be a prescribed observation window. 
+We say that the trajectory has a sustained threshold crossing if there exists a time $T_0\geq 0$ such that
+\[
+    h(t)\geq h_{\mathrm{esc}} \qquad \text{for all }t\in[T_0,T_0+\Delta T].
+\]
+The first such time is denoted by
+\[
+    T_{\mathrm{win}} = \inf \left\{ T_0\geq 0: h(t)\geq h_{\mathrm{esc}} \text{ for all }t\in[T_0,T_0+\Delta T] \right\}.
+\]
+If no such time exists, we set
+\[
+    T_{\mathrm{win}}=+\infty.
+\]
+\end{definition}
