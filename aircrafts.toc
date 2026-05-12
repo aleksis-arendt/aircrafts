@@ -1,30 +1,29 @@
-\contentsline {part}{I\hspace {1em}Controlled ODE Model and Energy Analysis}{3}{part.1}%
-\contentsline {section}{\numberline {1}Introduction}{3}{section.1}%
-\contentsline {section}{\numberline {2}1D Motion Model}{4}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Construction}{4}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Tracking Error and Feedback Law}{5}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Numerical Stress Tests}{6}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}Stability Analysis of the CLE Equation}{9}{subsection.2.4}%
-\contentsline {section}{\numberline {3}Energy Method for the CLE Equation}{10}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Error State Energy}{11}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Accumulated Control Effort}{12}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Variational Formulation of the Performance Cost}{12}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Compatibility with the PD feedback law}{14}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Comparing Variational and PD Responses}{16}{subsection.3.5}%
-\contentsline {part}{II\hspace {1em}Mass Variation Applications}{19}{part.2}%
-\contentsline {section}{\numberline {4}Aircraft Fuel and Mass Model}{19}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Mass Model}{19}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Energy Method in the Aircraft Mass Model}{20}{subsection.4.2}%
-\contentsline {section}{\numberline {5}Spacecraft Fuel and Planetary Escape}{25}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Spacecraft Propellant Mass Model}{26}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Derivation of the Ideal Rocket Equation}{26}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}Planet Escape Criterion}{28}{subsection.5.3}%
-\contentsline {section}{\numberline {6} Further Work}{29}{section.6}%
-\contentsline {part}{III\hspace {1em}Technical Appendices and Notation}{32}{part.3}%
-\contentsline {section}{\numberline {A}Polynomial Differential Operators}{32}{appendix.A}%
-\contentsline {section}{\numberline {B}Laplace Transform and Characteristic Roots}{38}{appendix.B}%
-\contentsline {section}{\numberline {C}Calculus of Variations}{44}{appendix.C}%
-\contentsline {subsection}{\numberline {C.1}First Fundamental Lemma of Variation}{44}{subsection.C.1}%
-\contentsline {subsection}{\numberline {C.2}Euler--Lagrange Equation}{47}{subsection.C.2}%
-\contentsline {section}{\numberline {D}Grönwall Inequality}{51}{appendix.D}%
-\contentsline {section}{\numberline {E}Notation Tables}{53}{appendix.E}%
+\contentsline {part}{I\hspace {1em}Controlled ODE Model and Energy Analysis}{4}{part.1}%
+\contentsline {section}{\numberline {1}1D Motion Model}{4}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Construction}{4}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Tracking Error and Feedback Law}{5}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Numerical Stress Tests}{6}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Stability Analysis of the CLE Equation}{8}{subsection.1.4}%
+\contentsline {section}{\numberline {2}Energy Method for the CLE Equation}{10}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Error State Energy}{10}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Accumulated Control Effort}{11}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Variational Formulation of the Performance Cost}{12}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Compatibility with the PD feedback law}{14}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Comparing Variational and PD Responses}{16}{subsection.2.5}%
+\contentsline {part}{II\hspace {1em}Mass Variation Applications}{18}{part.2}%
+\contentsline {section}{\numberline {3}Aircraft Fuel and Mass Model}{18}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Mass Model}{18}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Energy Method in the Aircraft Mass Model}{19}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Spacecraft Fuel and Planetary Escape}{24}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Spacecraft Propellant Mass Model}{25}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Derivation of the Ideal Rocket Equation}{25}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Planet Escape Criterion}{27}{subsection.4.3}%
+\contentsline {section}{\numberline {5} Further Work}{28}{section.5}%
+\contentsline {part}{III\hspace {1em}Technical Appendices and Notation}{31}{part.3}%
+\contentsline {section}{\numberline {A}Polynomial Differential Operators}{31}{appendix.A}%
+\contentsline {section}{\numberline {B}Laplace Transform and Characteristic Roots}{37}{appendix.B}%
+\contentsline {section}{\numberline {C}Calculus of Variations}{43}{appendix.C}%
+\contentsline {subsection}{\numberline {C.1}First Fundamental Lemma of Variation}{43}{subsection.C.1}%
+\contentsline {subsection}{\numberline {C.2}Euler--Lagrange Equation}{46}{subsection.C.2}%
+\contentsline {section}{\numberline {D}Grönwall Inequality}{50}{appendix.D}%
+\contentsline {section}{\numberline {E}Notation Tables}{52}{appendix.E}%

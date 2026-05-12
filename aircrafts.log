@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2025.12.30)  11 MAY 2026 11:25
+This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2025.12.30)  12 MAY 2026 19:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -719,8 +719,11 @@ Package hyperref Info: Link coloring OFF on input line 32.
 \@outlinefile=\write4
 \openout4 = `aircrafts.out'.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 35.
 
+
+Package hyperref Warning: Rerun to get /PageLabels entry.
+
+LaTeX Font Info:    Trying to load font information for U+msa on input line 35.
 
 (C:\Users\WIN10\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -743,11 +746,9 @@ File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 \tf@toc=\write5
 \openout5 = `aircrafts.toc'.
 
- [2] [3
-
-]
+ [2] [3]
 LaTeX Font Info:    Trying to load font information for U+ding on input line 10
-0.
+3.
 
 (C:\Users\WIN10\AppData\Local\Programs\MiKTeX\tex/latex/bbding\uding.fd
 File: Uding.fd 1996/02/01 v1.0 BBding font definitions
@@ -755,49 +756,47 @@ File: Uding.fd 1996/02/01 v1.0 BBding font definitions
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[4] [5] [6]
+[4
+
+] [5]
 File: figures/fig-02-02-case-01-below-hd.pdf Graphic file (type pdf)
 <use figures/fig-02-02-case-01-below-hd.pdf>
+ [6]
 File: figures/fig-02-02-case-02-above-hd.pdf Graphic file (type pdf)
 <use figures/fig-02-02-case-02-above-hd.pdf>
- [7]
 File: figures/fig-02-02-case-03-no-velocity-feedback.pdf Graphic file (type pdf
 )
 <use figures/fig-02-02-case-03-no-velocity-feedback.pdf>
- [8] [9]
+ [7] [8]
 File: figures/fig-02-05-three-regimes-side-by-side.pdf Graphic file (type pdf)
 <use figures/fig-02-05-three-regimes-side-by-side.pdf>
- [10] [11] [12] [13] [14] [15] [16]
+ [9] [10] [11] [12] [13] [14] [15] [16]
 File: figures/fig-02-07-variational-shooting.pdf Graphic file (type pdf)
 <use figures/fig-02-07-variational-shooting.pdf>
- [17] [18] [19
+ [17] [18
 
-]
-[20] [21] [22] [23] [24] [25] [26] [27] [28] [29] [30] [31] [32
+] [19]
+[20] [21] [22] [23] [24] [25] [26] [27] [28] [29] [30] [31
 
-] [33] [34]
+] [32] [33] [34]
 [35] [36] [37] [38] [39] [40] [41] [42] [43] [44] [45] [46] [47] [48] [49]
-[50] [51] [52] [53] [54] [55] (aircrafts.bbl) [56
+[50] [51] [52] [53] [54] (aircrafts.bbl) [55
 
 ] (aircrafts.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package rerunfilecheck Info: File `aircrafts.out' has not changed.
-(rerunfilecheck)             Checksum: BCF228E6A5B75E0C0382B47718EAF152;6133.
+(rerunfilecheck)             Checksum: D87ABAD200C0A0FB04AA11320BB72010;6023.
  ) 
 Here is how much of TeX's memory you used:
- 20772 strings out of 409617
- 380806 string characters out of 5774012
+ 20773 strings out of 409617
+ 380827 string characters out of 5774012
  1952191 words of memory out of 5000000
- 42507 multiletter control sequences out of 15000+600000
+ 42508 multiletter control sequences out of 15000+600000
  567365 words of font info for 97 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 99i,13n,107p,557b,916s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,13n,107p,561b,916s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on aircrafts.pdf (56 pages).
+Output written on aircrafts.pdf (55 pages).
