@@ -1,29 +1,29 @@
 \contentsline {part}{I\hspace {1em}Controlled ODE Model and Energy Analysis}{4}{part.1}%
 \contentsline {section}{\numberline {1}1D Motion Model}{4}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Construction}{4}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.1}Model Construction}{4}{subsection.1.1}%
 \contentsline {subsection}{\numberline {1.2}Tracking Error and Feedback Law}{5}{subsection.1.2}%
-\contentsline {subsection}{\numberline {1.3}Numerical Stress Tests}{6}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.3}Numerical Simulation}{6}{subsection.1.3}%
 \contentsline {subsection}{\numberline {1.4}Stability Analysis of the CLE Equation}{8}{subsection.1.4}%
 \contentsline {section}{\numberline {2}Energy Method for the CLE Equation}{10}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Error State Energy}{10}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Accumulated Control Effort}{11}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}Variational Formulation of the Performance Cost}{12}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}Compatibility with the PD feedback law}{14}{subsection.2.4}%
-\contentsline {subsection}{\numberline {2.5}Comparing Variational and PD Responses}{16}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.4}Factorization Theorem}{13}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Comparison of Variational and Conventional Solutions of CLE}{16}{subsection.2.5}%
 \contentsline {part}{II\hspace {1em}Mass Variation Applications}{18}{part.2}%
 \contentsline {section}{\numberline {3}Aircraft Fuel and Mass Model}{18}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Mass Model}{18}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Energy Method in the Aircraft Mass Model}{19}{subsection.3.2}%
-\contentsline {section}{\numberline {4}Spacecraft Fuel and Planetary Escape}{24}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Spacecraft Propellant Mass Model}{25}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Derivation of the Ideal Rocket Equation}{25}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Planet Escape Criterion}{27}{subsection.4.3}%
-\contentsline {section}{\numberline {5} Further Work}{28}{section.5}%
-\contentsline {part}{III\hspace {1em}Technical Appendices and Notation}{31}{part.3}%
-\contentsline {section}{\numberline {A}Polynomial Differential Operators}{31}{appendix.A}%
-\contentsline {section}{\numberline {B}Laplace Transform and Characteristic Roots}{37}{appendix.B}%
-\contentsline {section}{\numberline {C}Calculus of Variations}{43}{appendix.C}%
-\contentsline {subsection}{\numberline {C.1}First Fundamental Lemma of Variation}{43}{subsection.C.1}%
-\contentsline {subsection}{\numberline {C.2}Euler--Lagrange Equation}{46}{subsection.C.2}%
-\contentsline {section}{\numberline {D}Grönwall Inequality}{50}{appendix.D}%
-\contentsline {section}{\numberline {E}Notation Tables}{52}{appendix.E}%
+\contentsline {subsection}{\numberline {3.2}Energy Method in the Aircraft Model}{19}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Spacecraft Fuel and Planetary Escape}{23}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Spacecraft Propellant Mass Model}{23}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Derivation of the Ideal Rocket Equation}{24}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Planetary Escape Velocity}{25}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Further Work}{26}{section.5}%
+\contentsline {part}{III\hspace {1em}Appendices and Notation}{30}{part.3}%
+\contentsline {section}{\numberline {A}Polynomial Differential Operators}{30}{appendix.A}%
+\contentsline {section}{\numberline {B}Laplace Transform and Characteristic Roots}{36}{appendix.B}%
+\contentsline {section}{\numberline {C}Calculus of Variations}{42}{appendix.C}%
+\contentsline {subsection}{\numberline {C.1}First Fundamental Lemma of Variation}{42}{subsection.C.1}%
+\contentsline {subsection}{\numberline {C.2}Euler--Lagrange Equation}{45}{subsection.C.2}%
+\contentsline {section}{\numberline {D}Grönwall Inequality}{49}{appendix.D}%
+\contentsline {section}{\numberline {E}Notation Tables}{51}{appendix.E}%

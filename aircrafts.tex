@@ -62,20 +62,14 @@ where $k_1$ and $k_2$ are constants to be chosen. This feedback law means that t
 \[
  e'' + (k_2 + c)e' + k_1e = 0.
 \]
-This is a second-order linear ODE, and the main part of this project is organized around this equation. The central question is how the control input, through the feedback parameters, affects stability and damping behavior.
-
-The note is organized around three themes: the derivation and stability of the CLE equation, its energy and variational structure, and its extension to mass-dependent aircraft and spacecraft models.
-For aircraft motion, fuel burn makes the normalized drag coefficient time-dependent, leading to a CLE equation with variable damping. 
-A modified Lyapunov energy is then used to prove convergence of the aircraft error dynamics. 
-For spacecraft motion, propellant loss is also the mechanism that generates thrust. 
-This gives the ideal rocket equation and an energy-based criterion for planetary escape.
+This is a second-order linear ODE. The central question is how the control input, through the feedback parameters, affects stability and damping behavior.
 
 All source files, numerical scripts, and the revision history of this report
 are available at \url{https://github.com/aleksis-arendt/aircrafts}.
 \part{Controlled ODE Model and Energy Analysis}
 \section{1D Motion Model}
 
-\subsection{Construction}
+\subsection{Model Construction}
 The notation used in the 1D model is summarized in Table~\ref{tab:1d-notation}.
 
 We choose the vertical coordinate so that the positive direction is upward. Let $m$ denote the mass of the moving body. In the basic model, $m$ is assumed to be constant, $g$ is treated as a constant gravitational acceleration, and the desired height $h_d$ is fixed. The drag force is modeled as a linear function of velocity, namely
@@ -85,7 +79,7 @@ We choose the vertical coordinate so that the positive direction is upward. Let 
 \]
 For simplicity, we ignore nonlinear drag, lift, rotation, thrust-direction constraints, turbulence, and mass variation.
 
-The forces acting on the body are the thrust force $T(t)$, the gravitational force $-mg$, and the linear drag force $-bv(t)$. By Newton's second law, for a body with constant mass, the net force equals mass times acceleration~\cite{arnold_classical_mechanics}. Hence
+The forces acting on the body are the thrust force $T(t)$, the gravitational force $-mg$, and the linear drag force $-bv(t)$. By Newton's second law~\cite{arnold_classical_mechanics}, we have
 \[
  m h''(t) = T(t) - mg - bv(t).
 \]
@@ -136,7 +130,6 @@ For example, if $v(t) > 0$, then the body is moving upward and $-cv(t) < 0$, so 
 If $v(t) < 0$, then the body is moving downward and $-cv(t) > 0$, so drag acts upward and slows the downward motion. 
 In this sense, $c$ measures the strength of the physical damping caused by the surrounding medium.
 
-After this normalization, every term in the second equation has the unit of acceleration, $\mathrm{m/s^2}$. The term $u(t)$ represents the upward control acceleration, while $-g$ and $-cv(t)$ represent the effects of gravity and linear drag.
 \subsection{Tracking Error and Feedback Law}
 Let $h_d$ be the desired height. The goal is to design a feedback law for the control input $u(t)$ such that the height $h(t)$ approaches $h_d$ as time evolves. To measure the deviation between the current height and the desired height, we introduce the \textit{tracking error} $e(t) = h(t) - h_d.$ Thus, the stabilization problem becomes the problem of choosing $u(t)$ so that $e(t) \to 0$ as $t \to + \infty$. The choice of $u(t)$ is motivated by several considerations.
 
@@ -159,7 +152,7 @@ where $k_1, k_2 > 0$ are feedback gains. The parameter $k_1$ determines how stro
  \boxed{e''(t) + (k_2 + c)e'(t) + k_1e(t) = 0.}
 \end{equation}
 We call this equation the \textit{closed-loop error equation}, or the \textit{CLE equation} for short.
-\subsection{Numerical Stress Tests}
+\subsection{Numerical Simulation}
 To illustrate the effect of the control input $u$, we simulate the 1D controlled motion model using the RK4 method. The numerical results are visualized using Matplotlib.
 The desired height is chosen as $h_d = 10,$ and the parameters are 
 \[
@@ -264,7 +257,6 @@ as $t \to + \infty$. Thus, $\limit_{t \to + \infty} e(t) = 0$.
 
 For example, with $k_1 = 4$, $e(0) = 3$, and $e'(0) = 0$, the three cases
 $\gamma = 5, 4, 1.2$ give the overdamped, critically damped, and underdamped behaviors below.
-The same RK4 implementation is used for the damping-regime comparison.
 \begin{center}
   \includegraphics[scale=0.5]{figures/fig-02-05-three-regimes-side-by-side.pdf}
 \end{center}
@@ -277,31 +269,34 @@ However, characteristic roots only describe the asymptotic behavior of the solut
 \section{Energy Method for the CLE Equation}
 The notation used for the energy and variational formulation is summarized in Table~\ref{tab:energy-notation}.
 \subsection{Error State Energy}
-Following the Lyapunov approach to control-law design, we introduce an energy-like positive definite function and require its derivative along the controlled dynamics to be non-positive. This is the standard mechanism by which a control law is shown to stabilize the relevant error variable \cite[Sec.~5.3, pp.~59--61]{yanushevsky2019modern}. There are several requirements for such a quantity. 
+We introduce a function that measures the size of the error state over time and whose derivative along the controlled dynamics is non-positive \cite[Sec.~5.3, pp.~59--61]{yanushevsky2019modern}. Such a quantity should satisfy several requirements.
 
-First, the state of the CLE equation consists of both the tracking error $e(t)$ and its velocity $e'(t)$. Hence the quantity should measure both components. 
+First, it should measure both the tracking error $e(t)$ and the error velocity $e'(t)$ in the CLE equation.
 
 Second, it should be nonnegative and vanish only at the equilibrium state $e = e' = 0.$
 
-Third, it should be compatible with the structure of equation~\eqref{mainrewrite1}. Specifically, the derivative of that quantity should contain the factor $(e'' + k_1e)$, so that the CLE equation turns it into a dissipative term.
+Third, its derivative should contain the factor $(e'' + k_1e)$, so that the CLE equation turns it into a dissipative term.
 
 These considerations lead to the choice
 \[
  \boxed{E(t) = \frac{1}{2}(e'(t))^2 + \frac{1}{2}k_1e(t)^2.}
 \]
-We call this \textit{error state energy}. The first term measures the velocity part of the error, while the second term measures the position part of the error. Hence, numerically, this energy gives us how large the error state is at time $t$.
+We call this \textit{error state energy}. The first term measures the velocity part of the error, while the second term measures the position part of the error. Thus, at the level of the formula, this energy indicates how large the error state is at time $t$.
 \begin{lemma}\label{decreasing}
-  For all $t > 0$, one has $E'(t) = -\gamma (e'(t))^2$.
+  For all $t > 0$, we have $E'(t) = -\gamma (e'(t))^2$.
 \end{lemma}
 \begin{proof}
   Calculating directly and using~\eqref{mainrewrite1}, we obtain
   \begin{align*}
- E'(t) = e''(t)e'(t) + k_1 e'(t)e(t) = e'(t)(e''(t) + k_1e(t)) = e'(t) [-\gamma e'(t)]
+ E'(t)
+ &= e''(t)e'(t) + k_1 e'(t)e(t) \\
+ &= e'(t)(e''(t) + k_1e(t)) \\
+ &= e'(t)[-\gamma e'(t)].
  \end{align*}
   Hence $E'(t) = -\gamma (e'(t))^2$ for all $t > 0$.
 \end{proof}
 
-With this lemma, one can see that the error energy is non-increasing in time. Hence the CLE system does not create new error energy; instead, the damping term $\gamma e'$ dissipates it. 
+The lemma shows that the error energy is non-increasing in time. Hence the CLE system does not create new error energy; instead, the damping term $\gamma e'$ dissipates it.
 
 To compare different feedback choices over a time interval, we introduce the \textit{accumulated error energy}
 \[
@@ -309,7 +304,7 @@ To compare different feedback choices over a time interval, we introduce the \te
 \]
 For the accumulated error energy over the whole time interval, we define
 \[
- J_E:= \lim_{T \to + \infty} \int_0^T E(t)dt = \int_0^\infty E(t)dt.
+ J_E := \lim_{T \to + \infty} \int_0^T E(t)\, dt = \int_0^\infty E(t)\, dt.
 \]
 \subsection{Accumulated Control Effort}
 A controller may reduce the tracking error quickly by applying a large input, but this effect is not captured by $J_E$.
@@ -400,7 +395,7 @@ For a simple boundary-value formulation, one may impose
 
 The first two conditions prescribe the initial error state, while the last two require the body to reach the desired height with zero velocity error at time $T$.
 Finally, the lemma~\ref{minimizer} shows that the stationary solution of this equation is the unique global minimizer of the performance functional. 
-\subsection{Compatibility with the PD feedback law}
+\subsection{Factorization Theorem}
 In this section, we relate the variational weights $p, q, r$ to a compatible PD feedback law. 
 The Euler--Lagrange equation associated with the variational functional is
 \[
@@ -422,8 +417,8 @@ Equivalently,
 \begin{equation}\label{eq:cle-operator}
  (D^2 + \gamma D + k_1)e = 0.
 \end{equation}
-We will use elementary algebra of constant-coefficient polynomial differential operators. 
-The needed facts are collected in Appendix~\ref{appendix:operator-algebra}: polynomial operators in $D$ commute by Lemma~\ref{lem:operator-commutativity}, polynomial divisibility is equivalent to kernel inclusion by Lemma~\ref{lem:operator-kernel-inclusion}, and the quotient factor in a factorization is unique by Lemma~\ref{lem:operator-quotient-unique}.
+We will use elementary algebra of constant-coefficient polynomial differential operators.
+The needed facts for the algebraic operator manipulations are stated and proved in Appendix~\ref{appendix:operator-algebra}.
 
 \begin{theorem}[Factorization Theorem]\label{factor}
 Assume $p, q, r > 0$, $k_1 > 0$, and $\gamma = k_2 + c > 0$.
@@ -511,7 +506,7 @@ If the expected sizes of $e$, $e'$, and $e'' + ce'$ are $E_0$, $v_{\mathrm{start
 \]
 This makes the three terms in the performance functional comparable in size and prevents one term from dominating only because of its physical units.
 
-\subsection{Comparing Variational and PD Responses}
+\subsection{Comparison of Variational and Conventional Solutions of CLE}
 
 In this subsection, we numerically compare several CLE trajectories. 
 All trajectories are obtained by solving the CLE equation
@@ -541,14 +536,6 @@ This gives
 \[
  k_1 = \sqrt{5}\approx 2.2361,\quad \text{ and }\quad k_2 = \sqrt{ 5 + 0.09 + 2\sqrt5 } - 0.3 \approx 2.7923.
 \]
-Thus the variational weights determine the PD feedback law
-\[
- u(t) = g - k_1e(t) - k_2e'(t),
-\]
-with
-\[
- (k_1, k_2)\approx (2.2361, 2.7923).
-\]
 For comparison, we also simulate three manually chosen PD feedback laws:
 \[
  (k_1, k_2) = (4, 1), (4, 4), (4, 8).
@@ -563,7 +550,7 @@ The curve generated by
 \[
  (k_1, k_2)\approx(2.2361, 2.7923)
 \]
-is the trajectory induced by the variational weights $p, q, r$. The other three curves are included as comparison cases. The case $k_2 = 1$ has weak damping and overshoots below the desired height. The case $k_2 = 4$ approaches $h_d$ more smoothly. The case $k_2 = 8$ is more heavily damped and remains above $h_d$ for a longer time. 
+is the trajectory induced by the variational weights $p, q, r$. The case $k_2 = 1$ has weak damping and overshoots below the desired height. The case $k_2 = 4$ approaches $h_d$ more smoothly. The case $k_2 = 8$ is more heavily damped and remains above $h_d$ for a longer time. 
 \begin{center}
     \includegraphics[scale=0.6]{figures/fig-02-07-variational-shooting.pdf}
 \end{center}
@@ -571,7 +558,7 @@ is the trajectory induced by the variational weights $p, q, r$. The other three 
 \part{Mass Variation Applications}
 \section{Aircraft Fuel and Mass Model}
 
-The notation used in the simplified aircraft mass-variation model is summarized in Table~\ref{tab:fuel-notation}.
+The notation used in this model is summarized in Table~\ref{tab:fuel-notation}.
 
 \begin{figure}[h]
 \centering
@@ -595,12 +582,10 @@ The notation used in the simplified aircraft mass-variation model is summarized 
     % fuel dump and labels
     \node[below] at (3.0,-2.05) {runway};
 \end{tikzpicture}
-\caption{Fuel burn and fuel dumping are modeled as mechanisms that reduce the aircraft mass during flight.}
+\caption{Fuel burn and fuel dumping reduce the aircraft mass during flight.}
 \label{fig:aircraft-fuel-dumping}
 \end{figure}
-Aircraft control and simulation models commonly treat guidance and control laws as mechanisms for shaping vehicle response under simplified dynamical assumptions \cite{stevens_lewis_johnson_aircraft_control_2015}.
-
- Fuel burn is normally the main weight change during flight; as fuel is used, the aircraft becomes lighter and its performance is improved.
+Fuel burn is normally the main weight change during flight; as fuel is used, the aircraft becomes lighter and its performance is improved \cite{stevens_lewis_johnson_aircraft_control_2015}.
 
 \subsection{Mass Model}
 We write the total aircraft mass as
@@ -639,92 +624,18 @@ The constant coefficient $c$ is therefore replaced by the time-dependent coeffic
 \[
  c(t) = \frac{b}{m(t)}.
 \]
-Thus mass loss directly changes the strength of the drag term after normalization.
-\subsection{Energy Method in the Aircraft Mass Model}
+Thus mass loss directly changes the strength of the drag term.
+\subsection{Energy Method in the Aircraft Model}
 
-In the aircraft model, the normalized drag coefficient depends on the mass profile:
-\[
- c(t) = \frac{b}{m(t)}.
-\]
-Under the same PD feedback law
-\[
- u(t) = g - k_1e(t) - k_2e'(t),
-\]
-the CLE equation becomes
+When the coefficient $c$ varies with time, the CLE equation becomes
 \begin{equation}\label{cle-aircraft}
  \boxed{e''(t) + (k_2 + c(t))e'(t) + k_1e(t) = 0. }
 \end{equation}
-Thus the damping coefficient is no longer constant. Instead, it is given by
-\[
- \gamma(t) = k_2 + c(t).
-\]
 We define the Lyapunov error energy by
 \[
  E(t) = \frac{1}{2}(e'(t))^2 + \frac{1}{2}k_1e(t)^2.
 \]
-\begin{lemma}[Energy dissipation with time-dependent damping]
-Suppose $k_1 > 0$, and let
-\[
- \gamma(t) = k_2 + c(t).
-\]
-Assume that
-\[
- \gamma(t)\ge \gamma(0) > 0
-\]
-for all $t\ge 0$. If $e$ solves~\eqref{cle-aircraft}, then one has
-\[
- E(t) + \int_0^t \gamma(s)(e'(s))^2\, ds = E(0).
-\]
-In particular,
-\[ \int_0^\infty (e'(s))^2\, ds
- \le
- \frac{E(0)}{\gamma(0)}.
-\]
-\end{lemma}
 
-\begin{proof}
-Differentiating $E(t)$, we get
-\[
- E'(t)
- =
- e'(t)e''(t) + k_1e(t)e'(t)
- =
- e'(t)\bigl(e''(t) + k_1e(t)\bigr).
-\]
-Since $e$ solves
-\[
- e''(t) + \gamma(t)e'(t) + k_1e(t) = 0,
-\]
-we have
-\[
- e''(t) + k_1e(t) = -\gamma(t)e'(t).
-\]
-Therefore,
-\begin{equation}\label{decreasingE}
- E'(t)
- =
- -\gamma(t)(e'(t))^2.
-\end{equation}
-    
-
-Integrating from $0$ to $t$, we obtain
-\[
- E(t) + \int_0^t \gamma(s)(e'(s))^2\, ds = E(0).
-\]
-Since $\gamma(s)\ge \gamma(0) > 0$, it follows that
-\[
- \gamma(0) \int_0^t(e'(s))^2\, ds
- \le \int_0^t\gamma(s)(e'(s))^2\, ds
- \le
- E(0).
-\]
-Thus
-\[ \int_0^t(e'(s))^2\, ds
- \le
- \frac{E(0)}{\gamma(0)}.
-\]
-Letting $t \to \infty$ gives our desired lemma.
-\end{proof}
 \begin{theorem}[Convergence of the aircraft CLE]
 Suppose $k_1 > 0$, and suppose that the damping coefficient
 $\gamma(t) = k_2 + c(t)$ satisfies
@@ -737,9 +648,9 @@ for all $t \geq 0$. If $e$ solves~\eqref{cle-aircraft}, then $e(t) \to 0$ and $e
 \begin{proof}
 For each $x > 0$, define the modified energy 
 \[
- \mc{E}_x(t) = E(t) + x e(t)e'(t)
+\mc{E}_x(t) = E(t) + x e(t)e'(t)
 \]
-where $0 < x < \sqrt{k_1}$. The next claim shows that this condition makes $\mc{E}_x(t)$ positive definite and comparable to $E(t)$.
+where $0 < x < \sqrt{k_1}$.
 \begin{claim}\label{4.3}
 If $0 < x < \sqrt{k_1}$, then $\mathcal E_x(t)$ is equivalent to $E(t)$. More precisely,
 \[
@@ -861,8 +772,8 @@ Then for $0 < x < \delta$, we have $a_x > 0$, and we obtain
     \[
  \mc{E}_x(t) \leq D_xe^{-C_x t}
  \]
-    \end{claim}
     for all $t \geq 0$.
+    \end{claim}
     \begin{proof}[Proof of the claim]
 From the previous claim, we have
 \[
@@ -887,7 +798,7 @@ which implies
 \[
  \mathcal E_x(t)\le \mathcal E_x(0)e^{-C_xt}.
 \]
-Choosing $D_x = E_x(0)$, we obtain the desired estimate.
+Choosing $D_x = \mathcal{E}_x(0)$, we obtain the desired estimate.
 \end{proof}
 By Claims~\ref{4.3} and~\ref{4.5}, one has
 \[
@@ -899,7 +810,7 @@ Letting $t \to + \infty$, we obtain $E(t) \to 0$, so $e(t) \to 0$ and $e'(t) \to
 The notation used in the simplified spacecraft model is summarized in Table~\ref{tab:spacecraft-notation}.
 
 In the spacecraft case, the loss of mass is not only a change in the coefficient of the ODE, but also the mechanism that generates thrust.
-In a simplified 1D model, we write
+We write
 \[
  m(t)h''(t) = v_e(-m'(t)) - m(t)g - bh'(t),
 \]
@@ -941,7 +852,7 @@ If the burn takes place on $[t_{\mathrm{start}}, t_{\mathrm{end}}]$, then the to
 Thus the mass decrease during the burn is exactly the propellant mass used.
 \subsection{Derivation of the Ideal Rocket Equation}
 
-To isolate the effect of propellant mass, we consider the idealized case where gravity and drag are neglected during the burn. 
+We consider the idealized case where gravity and drag are neglected during the burn.
 \begin{lemma}
     Suppose that, during the burn,
     \[
@@ -988,7 +899,7 @@ Thus the total velocity change is
 This is the ideal rocket equation~\cite{nasa_glenn_ideal_rocket_equation}. 
     
 \end{proof}
-\subsection{Planet Escape Criterion}
+\subsection{Planetary Escape Velocity}
 
 Let $R$ be the radius of the planet and let $M$ be its mass. 
 We write
@@ -1109,14 +1020,13 @@ Thus the escape velocity at altitude $h_{\mathrm{end}}$ is
 \label{fig:moon-earth-transfer}
 \end{figure} 
 
-\section{ Further Work}
+\section{Further Work}
 Several directions remain open for further work.
-First, one may replace the linear drag law by a nonlinear dissipative term. 
-For example, one may consider
+First, one may replace the linear drag law by a nonlinear dissipative term. Consider
 \[
  h'' = u - g - c(t)|h'|h'.
 \]
-Under the same feedback law, the corresponding error equation becomes
+The corresponding error equation becomes
 \[
  e'' + k_2e' + k_1e + c(t)|e'|e' = 0.
 \]
@@ -1137,8 +1047,7 @@ Then one may define and study the minimal escape time
  = \inf\{T_0 \geq 0: h(t) \geq h_{\mathrm{esc}}
  \text{ for all }t \geq T_0\}.
 \]
-For a finite-time numerical formulation, one may replace this by a sustained crossing
-condition: for some observation window $\Delta T>0$,
+In finite time, for some observation window $\Delta T>0$, the sustained crossing condition is
 \[
  h(t) \geq h_{\mathrm{esc}}
  \qquad
@@ -1256,7 +1165,7 @@ The thrust direction is no longer fixed, so the orientation of the aircraft or s
 This naturally leads to rotation groups, especially
 $SO(3)$, for attitude dynamics, or more generally $SE(3) = \mathbb R^3\rtimes SO(3)$, when translation and rotation are studied together. 
 
-\part{Technical Appendices and Notation}
+\part{Appendices and Notation}
 
 \appendix
 \section{Polynomial Differential Operators}\label{appendix:operator-algebra}
@@ -1264,7 +1173,7 @@ In this section, we collect several elementary algebraic facts about polynomial 
 operators. The background follows the course material in
 \cite{le_van_luyen_la1a}.
 
-Let $I \subset \mathbb R$ be an interval. We write
+Let $I \subseteq\mathbb R$ be an interval. We write
 \[
  D = \frac{d}{dt}.
 \]
@@ -1575,7 +1484,6 @@ The polynomial identity obtained above (and~\eqref{assump1}) becomes
 \[
  \sum_{\ell = 0}^{j}\binom{j}{\ell}A_\ell t^{j - \ell}\equiv0.
 \]
-This gives a triangular recurrence for the coefficients $A_j$.
 For $j = 0$, the identity is simply
 \[
  A_0 = T(\alpha) = 0.
@@ -1684,7 +1592,7 @@ Let $f:[0, \infty) \to \mathbb R$ be a function such that the integral below exi
  \mathcal L[f](s)
  = \int_0^\infty e^{-st}f(t)\, dt.
 \]
-When no confusion is possible, we write
+We write
 \[
  F(s) = \mathcal L[f](s).
 \]
@@ -1716,7 +1624,7 @@ By the linearity of the integral,
 \end{proof}
 
 \begin{lemma}[Laplace transform of derivatives]
-Suppose $f$ is sufficiently smooth and of exponential order so that the following transforms exist. If $F(s) = \mathcal L[f](s)$, then
+Suppose $f$ is sufficiently smooth and of exponential order so that the following transforms exist. Then
 \[
  \mathcal L[f'](s) = sF(s) - f(0),
 \]
@@ -1974,7 +1882,7 @@ If $\Delta < 0$, then the solution has the form
 \]
 \end{claim}
 \begin{proof}[Proof of the claim]
-Finally, suppose $\Delta < 0$. Define
+Define
 \[
  \alpha = -\frac{\gamma}{2},
  \quad
@@ -2046,7 +1954,7 @@ The bump-function construction follows the standard smooth cutoff construction i
 \begin{lemma}[Smooth bump function]
 Let $I = (t_0 - \delta, t_0 + \delta)$ be an interval such that
 \[
- [t_0 - \delta, t_0 + \delta] \subset (a, b).
+ [t_0 - \delta, t_0 + \delta] \subseteq (a, b).
 \]
 Define
 \[
@@ -2115,7 +2023,7 @@ Therefore
 \]
 By assumption,
 \[
- [t_0 - \delta, t_0 + \delta] \subset (a, b),
+ [t_0 - \delta, t_0 + \delta] \subseteq (a, b),
 \]
 so the support is compactly contained in $(a, b)$.
 \end{proof}
@@ -2238,19 +2146,11 @@ on $(a, b)$.
  \end{equation}
     By the chain rule,
     \[
- \frac{d}{d\varepsilon} L(t, y + \varepsilon\eta, y' + \varepsilon\eta', y'' + \varepsilon\eta'') = L_y\eta + L_{y'}\eta' + L_{y''}\eta'',
- \]
-    where the partial derivatives are evaluated at
-    \[
- (t, y + \varepsilon\eta, y' + \varepsilon\eta', y'' + \varepsilon\eta'').
+ \frac{d}{d\varepsilon} L(t, y + \varepsilon\eta, y' + \varepsilon\eta', y'' + \varepsilon\eta'') = L_y\eta + L_{y'}\eta' + L_{y''}\eta''.
  \]
     Evaluating at $\varepsilon = 0$, we obtain
     \[
- \left. \frac{d}{d\varepsilon} L(t, y + \varepsilon\eta, y' + \varepsilon\eta', y'' + \varepsilon\eta'') \right|_{\varepsilon = 0} = L_y\eta + L_{y'}\eta' + L_{y''}\eta'',
- \]
-    where now the derivatives are evaluated along
-    \[
- (t, y(t), y'(t), y''(t)).
+ \left. \frac{d}{d\varepsilon} L(t, y + \varepsilon\eta, y' + \varepsilon\eta', y'' + \varepsilon\eta'') \right|_{\varepsilon = 0} = L_y\eta + L_{y'}\eta' + L_{y''}\eta''.
  \]
      Substituting this into the right-hand side of~\eqref{euler1}, we obtain 
     \begin{equation}\label{euler2} \int_a^b \left( \eta\frac{dL}{dy} + \eta'\frac{dL}{dy'} + \eta''\frac{dL}{dy''}\right)dt = 0
@@ -2298,7 +2198,7 @@ That is,
 \]
 for every $e \in \mathcal A$, with equality if and only if $e = e_*$.
 \end{lemma}\begin{proof}
-Let $e \in \mathcal A$ be arbitrary,
+Let $e \in \mathcal A$ be arbitrary.
 Set $\eta = e - e_*.$ Since $e$ and $e_*$ satisfy the same boundary conditions, we have
 \[
  \eta(0) = \eta'(0) = \eta(T) = \eta'(T) = 0.
